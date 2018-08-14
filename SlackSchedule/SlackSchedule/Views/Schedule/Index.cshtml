@@ -1,0 +1,176 @@
+﻿
+@{
+    ViewBag.Title = TextResource.schedule_PageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .schedule, .time {
+        text-align: center;
+        font-size: 0.9em;
+        margin: 0;
+    }
+
+        .schedule td, .time td, .schedule th, .time th {
+            border: 1px solid #808080;
+            height: 23px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .schedule thead, .time thead {
+            background-color: #2d587d;
+            font-weight: 600;
+            color: azure;
+        }
+
+            .time thead th {
+                font-weight: 400;
+            }
+
+            .schedule thead tr {
+                height: 46px;
+            }
+
+            .time thead tr {
+                height: 23px;
+            }
+
+        .schedule tbody {
+            background-color: aliceblue;
+        }
+
+        .time td {
+            min-width: 23px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .schedule select, .schedule input {
+            height: 22px;
+            display: block;
+            padding: 0;
+            margin: 0;
+            border: 0;
+            width: 100%;
+            padding-left: 2px;
+        }
+
+    .projectInfo {
+        margin: 10px 0px;
+        background: #fff;
+    }
+
+        .projectInfo td {
+            border: 1px solid #808080;
+            padding: 2px 5px;
+        }
+
+    .projectTitle {
+        background: #2d587d;
+        font-weight: 600;
+        color: azure;
+    }
+
+    .txtTaskNameFocus {
+        position: absolute;
+        top: 0px;
+    }
+</style>
+
+<table class="projectInfo">
+    <tr>
+        <td class="projectTitle">@TextResource.schedule_ProjectName</td>
+        <td>CEREX</td>
+    </tr>
+    <tr>
+        <td class="projectTitle">@TextResource.schedule_Leader</td>
+        <td>Thanh</td>
+    </tr>
+    <tr>
+        <td class="projectTitle">@TextResource.schedule_ProjectDate</td>
+        <td>2018/07/25 ~ 2018/08/23</td>
+    </tr>
+</table>
+
+
+<table style="width:100%; position:relative;" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="td_schedule">
+            <table class="schedule" style="position: absolute; top:0px">
+                <thead>
+                    <tr>
+                        <td style="width: 23px">#</td>
+                        <td>@TextResource.schedule_Task</td>
+                        <td>@Html.Raw(TextResource.schedule_Curator)</td>
+                        <td>@TextResource.schedule_TaskStart</td>
+                        <td>@TextResource.schedule_TaskEnd</td>
+                        <td>@Html.Raw(TextResource.schedule_TaskEstimateTime)</td>
+                        <td>@TextResource.schedule_TaskFinish</td>
+                        <td>@Html.Raw(TextResource.schedule_TaskRealTime)</td>
+                        <td>@TextResource.schedule_TaskState</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 1; i < 21; i++)
+                    {
+                        @Html.Partial("_TaskPartial", i)
+                    }
+                </tbody>
+            </table>
+        </td>
+        <td>
+            <div id="div_time" style="display: block; width:100%; overflow-x:auto; overflow-y:no-display; position:relative;">
+                <table class="time" style="position: absolute; top:0px; left:-1px">
+                    <thead>
+                        <tr>
+                            <th colspan="7">7月</th>
+                            <th colspan="31">8月</th>
+                            <th colspan="22">9月</th>
+                        </tr>
+                        <tr>
+                            @for (int i = 0; i < 60; i++)
+                            {
+                                var time = DateTime.Parse("2018-07-25").AddDays(i);
+                                <th>@Html.Raw(String.Format("{0:dd}", time))</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < 20; i++)
+                        {
+                            @Html.Partial("_TimePartial", i)
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<script>
+    $("#td_schedule").width($(".schedule").width())
+    $("#div_time").height($(".schedule").height() + 17)
+
+    var txtTaskNameFocusWidth = $(".schedule").width() - 24;
+    $("head").append('<style type="text/css">.txtTaskNameFocus{width: ' + txtTaskNameFocusWidth + 'px !important;max-width: ' + txtTaskNameFocusWidth + 'px !important}</style>');
+
+    var selectdate_from = "";
+    var selectdate_to = "";
+    $(".time tbody td").click(function () {
+        var selectdateEl = $(this);
+        var selectdate = selectdateEl.data('time');
+        alert(selectdate)
+    });
+
+    function txtTaskNameFocus(el, isblur) {
+        el = $(el);
+        if (isblur) {
+            el.removeClass('txtTaskNameFocus');
+        } else {
+            el.addClass('txtTaskNameFocus');
+        }
+
+    }
+
+</script>

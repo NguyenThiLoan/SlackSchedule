@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+
+    <link rel="stylesheet" type="text/css" href="~/Scripts/datatables/datatables.min.css" />
+    <script type="text/javascript" src="~/Scripts/common_func.js"></script>
+    <script type="text/javascript" src="~/Scripts/datatables/datatables.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            @Html.ActionLink(@TextResource.appName, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">@Html.ActionLink(@TextResource.menu_Home, "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink(@TextResource.menu_Project, "Index", "Project", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="drop1" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            @TextResource.menu_Management
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="drop1">
+                            <li>@Html.ActionLink(@TextResource.menu_Member, "Index", "Member", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink(@TextResource.menu_OfficeSetting, "OfficeTime", "Management", new { area = "" }, new { @class = "dropdown-item" })</li>
+                            <li>@Html.ActionLink(@TextResource.menu_OffDate, "OffDate", "Management", new { area = "" }, new { @class = "dropdown-item" })</li>
+                        </ul>
+                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content h-100">
+        @RenderBody()
+    </div>
+    <hr />
+    <footer>
+        <p>@TextResource.appCopyright.Format2(@DateTime.Now.Year)</p>
+    </footer>
+    <script>
+        $(function () {
+            resizeBody();
+        })
+
+        $(window).on('resize', function () {
+            resizeBody();
+        })
+
+        function resizeBody() {
+            $("body").css('height', '');
+                
+            var body_content_height = $(".body-content").height();
+            var windowy_height = window.innerHeight;
+            if (windowy_height > body_content_height) {
+                $("body").css('height', windowy_height - 150)
+            } else {
+                $("body").css('height', body_content_height)
+            }
+        }
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

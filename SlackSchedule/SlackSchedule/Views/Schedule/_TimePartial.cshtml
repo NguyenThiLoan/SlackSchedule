@@ -1,0 +1,7 @@
+﻿<tr>
+    @for (int i = 0; i < 60; i++)
+    {
+        var time = DateTime.Parse("2018-07-25").AddDays(i);
+        <td data-time=@Html.Raw(String.Format("{0:yyyy-MM-dd}", time))></td>
+    }
+</tr>

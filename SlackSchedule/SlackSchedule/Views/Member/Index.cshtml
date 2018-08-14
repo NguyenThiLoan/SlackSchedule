@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = @TextResource.member_ListTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<SlackSchedule.Models.Member>
+
+<h2>
+    @TextResource.member_ListTitle
+    <a type="submit" class="btn btn-primary" href="@Url.Action("Edit", "Member")"><i class="fa fa-plus-circle"></i>&nbsp;@TextResource.btn_Add</a>
+</h2>
+<hr />
+
+@if (!String.IsNullOrEmpty(ViewData["message"] as String))
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                @ViewData["message"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+</style>
+<div class="col-lg-8 col-md-12">
+    <table id="tbMember" class="table table-bordered table-striped table-responsive-sm table-sm table-custom">
+        <thead>
+            <tr>
+                <th>
+                    @TextResource.list_Action
+                </th>
+                <th>
+                    #
+                </th>
+                <th>
+                    @TextResource.member_Name
+                </th>
+                <th>
+                    @TextResource.member_Email
+                </th>
+                <th>
+                    @TextResource.member_SlackID
+                </th>
+                <th>
+                    @TextResource.member_Active
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="@Html.Raw(!item.Active ? "disabled" : "")">
+                    <td class="text-center"><a href="@Url.Action("Edit", "Member", new { id = item.Id })"><i class="fa fa-edit text-success"></i></a></td>
+                    <td class="text-center">@item.Id</td>
+                    <td><a href="@Url.Action("Info", "Member", new { id = item.Id })">@item.Name</a></td>
+                    <td>
+                        @item.Email
+                    </td>
+                    <td>@item.SlackId</td>
+                    @if (item.Active)
+                    {
+                        <td class="text-center text-success">
+                            <i class="fa fa-user"></i>
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="text-center text-danger">
+                            <i class="fa fa-user-alt-slash"></i>
+                        </td>
+                    }
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#tbMember').dataTable({
+            "language": {
+                "url": "@Url.Content(TextResource.datatables_Lang)"
+            },
+            "aaSorting": [[1, "asc"]],
+            "aoColumns": [
+                { sWidth: '50px', "bSortable": false },
+                { sWidth: '50px' },
+                { sWidth: 'auto' },
+                { sWidth: 'auto' },
+                { sWidth: 'auto' },
+                { sWidth: '50px' }
+            ]
+        });
+    });
+</script>

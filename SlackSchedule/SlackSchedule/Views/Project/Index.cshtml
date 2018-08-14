@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = @TextResource.project_ListTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<SlackSchedule.Models.Dto.ProjectIndexDto>
+
+<h2>
+    @TextResource.project_ListTitle
+<a type="submit" class="btn btn-primary" href="@Url.Action("Edit", "Project")"><i class="fa fa-plus-circle"></i>&nbsp;@TextResource.btn_Add</a>
+</h2>
+<hr />
+
+@if (!String.IsNullOrEmpty(ViewData["message"] as String))
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                @ViewData["message"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="table-responsive">
+    <table id="tbProject" class="table table-bordered table-striped table-responsive-sm table-sm table-custom">
+        <thead>
+            <tr>
+                <th>
+                    @TextResource.list_Action
+                </th>
+                <th>
+                    #
+                </th>
+                <th>
+                    @TextResource.project_CustomerName
+                </th>
+                <th>
+                    @TextResource.project_ProjectName
+                </th>
+                <th>
+                    @TextResource.project_ProjectStart
+                </th>
+                <th>
+                    @TextResource.project_ProjectEnd
+                </th>
+                <th>
+                    @TextResource.project_ProjectLeader
+                </th>
+                <th>
+                    @TextResource.project_ProjectCoder
+                </th>
+                <th>
+                    @TextResource.project_ProjectTester
+                </th>
+                <th>
+                    @TextResource.project_ProjectFinish
+                </th>
+                <th>
+                    @TextResource.project_ProjectState
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="">
+                    <td class="text-center"><a href="@Url.Action("Edit", "Project", new { id = item.Id })"><i class="fa fa-edit text-success"></i></a></td>
+                    <td class="text-center">1</td>
+                    <td>AZT</td>
+                    <td><a href="@Url.Action("Index", "Schedule", new { id = item.Id })">@item.ProjectName</a></td>
+                    <td class="text-center">
+                        @if (item.StartDate.HasValue)
+                        {@Html.Raw(Common.FormatDateTimeJP(item.StartDate.Value))}
+                    </td>
+                    <td class="text-center">
+                        @if (item.EndDate.HasValue)
+                        {@Html.Raw(Common.FormatDateTimeJP(item.EndDate.Value))}
+                    </td>
+                    <td>
+                        @item.LeaderName
+                    </td>
+                    <td>@item.CoderName</td>
+                    <td>@item.TesterName</td>
+                    <td class="text-center">80%</td>
+                    <td class="text-center">
+                        @switch (item.StateId)
+                        {
+                            case 1:
+                                <text>
+                                    <span class="badge badge-warning">@item.StateName</span>
+                                </text>
+                                break;
+                            case 2:
+                                <text>
+                                    <span class="badge badge-danger">@item.StateName</span>
+                                </text>
+                                break;
+                            case 3:
+                                <text>
+                                    <span class="badge badge-success">@item.StateName</span>
+                                </text>
+                                break;
+                            default:
+                                break;
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#tbProject').dataTable({
+            "language": {
+                "url": "@Url.Content(TextResource.datatables_Lang)"
+            },
+            "aaSorting": [[10, "desc"]],
+            "aoColumns": [
+                { sWidth: '50px', "bSortable": false },
+                { sWidth: '50px' },
+                { sWidth: '100px' },
+                { sWidth: 'auto' },
+                { sWidth: '100px' },
+                { sWidth: '100px' },
+                { sWidth: '100px' },
+                { sWidth: '200px' },
+                { sWidth: '200px' },
+                { sWidth: '60px' },
+                { sWidth: '60px' },
+            ]
+        });
+    });
+</script>

@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = @TextResource.project_EditTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #Info label{
+        font-weight:600;
+    }
+</style>
+
+<h3>@TextResource.project_EditTitle</h3>
+<hr />
+<form id="Info" style="margin: 40px;">
+    <div class="form-group row">
+        <label for="projectStatus" class="col-lg-1 control-label">@TextResource.project_ProjectState</label>
+        <div class="col-lg-4 col-md-12">
+            <select class="form-control input-sm" id="projectStatus">
+                <option>
+                    見積
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="customerName" class="col-lg-1 control-label">@TextResource.project_CustomerName</label>
+        <div class="col-lg-4 col-md-12">
+            <select class="form-control" id="customerName"></select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="projectName" class="col-lg-1 control-label">@TextResource.project_ProjectName</label>
+        <div class="col-lg-4 col-md-12">
+            <input type="text" class="form-control" id="projectName">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="projectStart" class="col-lg-1 control-label">@TextResource.project_ProjectDate</label>
+        <div class="col-lg-4 col-md-12">
+            <div class="row">
+                <div class="col-lg-5 input-group">
+                    <input type="text" class="form-control" id="projectStart">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-outline-secondary"><i class="fa fa-calendar text-black-50"></i></button>
+                    </div>
+                </div>
+                <div class="col-lg-1 text-center" style="line-height:35px">～</div>
+                <div class="col-lg-6 input-group">
+                    <input type="text" class="form-control" id="projectEnd">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-outline-secondary"><i class="fa fa-calendar text-black-50"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="leaderName" class="col-lg-1 control-label">@TextResource.project_ProjectLeader</label>
+        <div class="col-lg-4 col-md-12">
+            <select class="form-control" id="leaderName"></select>
+        </div>
+    </div>
+    <div class="row">
+        <label for="coderName" class="col-lg-1 control-label">@TextResource.project_ProjectCoder</label>
+        <div class="col-lg-4 col-md-12 input-group">
+            <select class="form-control" id="coderName"></select>
+            <div class="input-group-append">
+                <button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="" class="col-lg-1 control-label"></label>
+        <div class="col-lg-4 col-md-12">
+            <ul class="list-group col-sm-12" style="padding-right:0">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    1. KHOA
+                    <span data-coderId="1" onclick="delCoder(this)" class="delCoderName btn badge badge-danger badge-pill"><i class="fa fa-times"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    2. NGHIA
+                    <button data-coderId="2" onclick="delCoder(this)" class="delCoderName btn badge badge-danger badge-pill"><i class="fa fa-times"></i></button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <label for="testerName" class="col-lg-1 control-label">@TextResource.project_ProjectTester</label>
+        <div class="col-lg-4 col-md-12 input-group">
+            <select class="form-control" id="testerName"></select>
+            <div class="input-group-append">
+                <button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="" class="col-lg-1 control-label"></label>
+        <div class="col-lg-4 col-md-12">
+            <ul class="list-group col-sm-12" style="padding-right:0">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    1. MI
+                    <span data-testerId="1" onclick="delTester(this)" class="delTesterName btn badge badge-danger badge-pill"><i class="fa fa-times"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    2. LOAN
+                    <span data-testerId="2" onclick="delTester(this)" class="delTesterName btn badge badge-danger badge-pill"><i class="fa fa-times"></i></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <label for="" class="col-lg-1 control-label"></label>
+        <div class="col-lg-10">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;@TextResource.btn_Save</button>
+            <button type="submit" class="btn btn-danger"><i class="fa fa-trash-alt"></i>&nbsp;@TextResource.btn_Delete</button>
+        </div>
+    </div>
+</form>
+
+<script>
+
+    function delCoder(el) {
+        el = $(el);
+        var id = el.data('coderid');
+        alert('Delete coder: ' + id);
+        el.parent().remove();
+    }
+
+    function delTester(el) {
+        el = $(el);
+        var id = el.data('testerid');
+        alert('Delete tester: ' + id);
+        el.parent().remove();
+    }
+</script>

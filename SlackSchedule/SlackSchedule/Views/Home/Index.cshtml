@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = TextResource.menu_Home;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .card-body.no-padding{
+        padding: 0 !important;
+    }
+
+        .card-body.no-padding .list-group {
+            border-radius: 0 !important;
+        }
+</style>
+
+<div class="row h-100">
+    <div class="col col-lg-6 h-100">
+        <div class="card border-info mb-3 h-100">
+            <div class="card-header bg-info  text-white">@TextResource.home_title_GlobalTask</div>
+            <div class="card-body text-info h-100 no-padding" style="overflow-y: auto">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action">@TextResource.home_task_GlobalContent.Format2("CEREX", "KHOA", "ああああああああ！")</a>
+                    <a href="#" class="list-group-item list-group-item-action">@TextResource.home_task_GlobalContent.Format2("CEREX", "NGHIA", "えええええええ！")</a>
+                    <a href="#" class="list-group-item list-group-item-action">@TextResource.home_task_GlobalContent.Format2("Fuzoku", "KHOA", "えええええええ！")</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col col-lg-6 h-100">
+        <div class="card border-danger mb-3 h-25">
+            <div class="card-header bg-danger text-white">@TextResource.home_title_UncompleteTask</div>
+            <div class="card-body text-danger no-padding" style="overflow-y: auto;">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action">@TextResource.home_task_PrivateContent.Format2("CEREX", "ああああああああ！")</a>
+                    <a href="#" class="list-group-item list-group-item-action">@TextResource.home_task_PrivateContent.Format2("CEREX", "ああああああああ！")</a>
+                    <a href="#" class="list-group-item list-group-item-action">@TextResource.home_task_PrivateContent.Format2("CEREX", "ああああああああ！")</a>
+                    <a href="#" class="list-group-item list-group-item-action">@TextResource.home_task_PrivateContent.Format2("CEREX", "ああああああああ！")</a>
+                    <a href="#" class="list-group-item list-group-item-action">@TextResource.home_task_PrivateContent.Format2("CEREX", "ああああああああ！")</a>
+                </div>
+            </div>
+        </div>
+        <div class="card border-primary mb-3 h-25">
+            <div class="card-header bg-primary text-white">@TextResource.home_title_TodayTask</div>
+            <div class="card-body text-primary no-padding" style="overflow-y: auto">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action">@TextResource.home_task_PrivateContent.Format2("CEREX", "ああああああああ！")</a>
+                    <a href="#" class="list-group-item list-group-item-action">@TextResource.home_task_PrivateContent.Format2("Fuzoku", "えええええええ！")</a>
+                </div>
+            </div>
+        </div>
+        <div class="row h-75">
+            <div class="col col-lg-12 h-100">
+                <div class="card border-success mb-3 h-50">
+                    <div class="card-header bg-success text-white">@TextResource.home_title_PrivateTask</div>
+                    <div class="card-body text-success no-padding" style="overflow-y: auto">
+                        <div class="list-group">
+                            <a href="#" class="list-group-item list-group-item-action">@TextResource.home_task_PrivateContent.Format2("XYZ", "a ă â！")</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

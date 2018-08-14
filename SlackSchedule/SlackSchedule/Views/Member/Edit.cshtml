@@ -1,0 +1,99 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = TextResource.member_EditTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model SlackSchedule.Models.Member
+
+<style>
+    #Info label {
+        font-weight: 600;
+    }
+</style>
+
+
+
+<h3>
+    <a type="submit" class="btn btn-primary" href="@Url.Action("Index", "Member")"><i class="fa fa-chevron-left"></i>&nbsp;</a>
+    @TextResource.member_EditTitle
+</h3>
+<hr />
+
+@if (!String.IsNullOrEmpty(ViewData["message"] as String))
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-warning" role="alert">
+                @ViewData["message"]
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model != null)
+{
+    using (Html.BeginForm("Edit", "Member", FormMethod.Post))
+    {
+        if (Model.Id != 0)
+        {
+            @Html.HiddenFor(m => m.Id)
+            @Html.HttpMethodOverride(HttpVerbs.Put);
+        }
+
+        <div class="form-group row">
+            <label for="Name" class="col-lg-1 control-label">@TextResource.member_Name</label>
+            <div class="col-lg-4 col-md-12">
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="Email" class="col-lg-1 control-label">@TextResource.member_Email</label>
+            <div class="col-lg-4 col-md-12">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="SlackId" class="col-lg-1 control-label">@TextResource.member_SlackID</label>
+            <div class="col-lg-4 col-md-12">
+                @Html.TextBoxFor(m => m.SlackId, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.SlackId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="Password" class="col-lg-1 control-label">@TextResource.member_Password</label>
+            <div class="col-lg-4 col-md-12">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="projectStatus" class="col-lg-1 control-label">@TextResource.member_Active</label>
+            <div class="col-lg-4 col-md-12">
+                <div class="form-group form-check">
+                    @Html.CheckBoxFor(m => m.Active, new { @class = "form-check-inpu" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label for="" class="col-lg-1 control-label"></label>
+            <div class="col-lg-10">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>&nbsp;@TextResource.btn_Save</button>
+                @if (Model.Id != 0)
+                {
+                    <button type="button" onclick="formSubmit('Member_Delete'); return false;" formnovalidate name="delete" class="btn btn-danger"><i class="fa fa-trash-alt"></i>&nbsp;@TextResource.btn_Delete</button>
+                }
+            </div>
+        </div>
+    }
+    using (Html.BeginForm("Edit", "Member", FormMethod.Post, new { @id = "Member_Delete" }))
+    {
+        @Html.HttpMethodOverride(HttpVerbs.Delete);
+    }
+}
+
+<script>
+
+</script>

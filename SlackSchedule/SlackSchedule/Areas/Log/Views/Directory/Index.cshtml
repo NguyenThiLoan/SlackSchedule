@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Index";
+    var arrLog = ViewBag.arrLog;
+}
+
+<style>
+    ul li{
+        padding-top: 10px;
+        font-size: 16px;
+    }
+</style>
+
+
+<ul>
+    @{
+        var folderName = "";
+        foreach (var item in arrLog)
+        {
+            var str = item.Split('\\');
+            folderName = str[str.Length - 1];
+            <li><a href="@Url.Action("FileLog","Directory", new { folderName = @folderName })"><i class="fa fa-folder-open-o" aria-hidden="true"> @folderName</i></a></li>
+        }
+    }
+</ul>
+        

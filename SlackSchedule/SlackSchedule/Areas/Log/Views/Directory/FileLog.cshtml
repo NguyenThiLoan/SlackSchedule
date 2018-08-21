@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+    var arrFileLog = ViewBag.arrFileName;
+    var FolderName = ViewBag.FolderName;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FileLog</title>
+    <style>
+        ul li {
+            padding-top: 10px;
+            font-size: 16px;
+        }
+    </style>
+
+</head>
+<body>
+    <div>
+        <ul>
+            @{
+                var FileName = "";
+                foreach(var item in arrFileLog)
+                {
+                    var str = item.Split('\\');
+                    FileName = str[str.Length - 1];
+                     <li><a href="@Url.Action("Detail", "Log", new {@FolderName, FileName = @FileName })"><i class="fa fa-file-text" aria-hidden="true">@FileName</i></a></li>
+                }
+            }
+           
+        </ul>
+    </div>
+</body>
+</html>

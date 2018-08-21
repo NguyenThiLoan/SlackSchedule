@@ -1,0 +1,53 @@
+﻿@{
+    var Logs = ViewBag.Logs;
+    Layout = null;
+}
+
+
+<link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Detail</title>
+</head>
+<body>
+    <div class="row-fluid">
+        <div class="col-sm-12">
+
+            <table class="table table-bordered table-striped" style="font-size: 14px; min-width: 100%">
+                <thead>
+                    <tr>
+                        <th style="min-width:180px">LogTime</th>
+                        <th style="min-width:80px">LogLevel</th>
+                        <th style="min-width:100px">Controller</th>
+                        <th style="min-width:100px">Action</th>
+                        <th style="min-width:400px">Url</th>
+                        <th style="min-width:250px">QueryString</th>
+                        <th style="min-width:600px">Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                    foreach (var item in Logs)
+                    {
+                        <tr>
+                            <td>@item.LogTime</td>
+                            <td>@item.LogLevel</td>
+                            <td>@item.Controller</td>
+                            <td>@item.Action</td>
+                            <td>@item.Url</td>
+                            <td>@item.QueryString</td>
+                            <td>@item.Message</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+
+        </div>
+    </div>
+</body>
+</html>
